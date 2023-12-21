@@ -18,13 +18,15 @@ const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
-    minlength: 6,
   },
   lastName: {
     type: String,
     required: true,
-    minlength: 6,
   },
+  role: {
+    type: Number,
+    default:1
+  }
 });
 
 userSchema.pre(

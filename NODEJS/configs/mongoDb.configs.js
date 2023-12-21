@@ -1,9 +1,7 @@
-const { default: mongoose } = require("mongoose");
-const mogoose = require("mongoose");
+const { mongoose } = require("mongoose");
 
 const connectToMongoDB = () => {
-  // mogoose.connect("mongodb://127.0.0.1:27017/db_todos")
-  mogoose.connect(process.env.MONGODB_URL);
+  mongoose.connect("mongodb://127.0.0.1:27017/surveydb")
   const connection = mongoose.connection;
   connection.on("error", (error) => {
     console.log("Error connection to MongoDB: ", error);

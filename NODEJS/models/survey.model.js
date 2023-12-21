@@ -1,10 +1,21 @@
 const mongoose = require('mongoose');
+const User = require('./user.model');
+const Survey = mongoose.model('Survey', surveySchema);
+
 
 const answerSchema = new mongoose.Schema({
   text: {
     type: String,
     required: true,
   },
+  userid:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:User
+  },
+  questionid:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:Survey
+  }
 
 });
 
@@ -27,6 +38,7 @@ const surveySchema = new mongoose.Schema({
     required: true,
   },
   questions: [questionSchema],
+  answers: [answerSchema],
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -35,6 +47,6 @@ const surveySchema = new mongoose.Schema({
 
 });
 
-const Survey = mongoose.model('Survey', surveySchema);
 
-module.exports = Survey;
+
+module.exports = mongoose.model('Survey', surveySchema);

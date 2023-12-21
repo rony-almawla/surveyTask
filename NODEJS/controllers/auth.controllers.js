@@ -21,7 +21,7 @@ const login = async (req, res) => {
     {
       ...userDetails,
     },
-    process.env.JWT_SECRET,
+    "survey",
     { expiresIn: "2 days" }
   );
 
@@ -32,10 +32,11 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  const { username, password, firstName, lastName } = req.body;
-  if (!username || !password || !firstName || !lastName) {
-    res.status(400).send({ message: "all fields are required" });
+  let { username, password, firstName, lastName, role } = req.body;
+  if (!role){
+    role = 1;
   }
+  
 
   try {
     // const user = await User.create({ username, password, firstName, lastName });
@@ -45,6 +46,7 @@ const register = async (req, res) => {
       password,
       firstName,
       lastName,
+      role
     });
 
     await user.save();
